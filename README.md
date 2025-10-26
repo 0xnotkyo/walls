@@ -25,7 +25,7 @@ This repo is constantly growing, with new wallpapers added frequently
 
 The collection also includes a **web version** with a more visual and aesthethic interface to easily explore all the wallpapers.
 
-🔗 
+🔗 https://0xnotkyo.github.io/walls/
 
 ---
 
