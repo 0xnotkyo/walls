@@ -87,6 +87,12 @@ main { padding-top: 80px; }
     gap: 0.5rem;
     padding: 1rem;
     flex-wrap: wrap;
+   
+   /* Evitar selección del texto en los botones */
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+     user-select: none;         
 }
 .pagination a {
     padding: 10px 20px;
@@ -96,6 +102,12 @@ main { padding-top: 80px; }
     border-radius: 5px;
     border: 1px solid var(--accent-hover);
     transition: all 0.3s;
+   
+    /* Evitar selección del texto en los botones */
+    -webkit-user-select: none; 
+    -moz-user-select: none;    
+    -ms-user-select: none;     
+     user-select: none;    
 }
 .pagination a:hover,
 .pagination a.active {
@@ -148,4 +160,20 @@ footer {
     -moz-user-select: none;
     -ms-user-select: none;
     pointer-events: auto;
+}
+
+/* Evitar selección del título */
+header h1 {
+  -webkit-user-select: none; 
+  -moz-user-select: none;   
+  -ms-user-select: none;     
+  user-select: none;         
+}
+
+/* Evitar selección del pie de página */
+footer p {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
