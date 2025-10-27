@@ -138,3 +138,14 @@ footer {
     0%, 100% { box-shadow: 0 0 5px var(--accent-hover); }
     50% { box-shadow: 0 0 15px var(--accent); }
 }
+
+/* ========================================
+   BLOQUEAR ARRASTRE DE IMÁGENES COMPLETAMENTE
+   ======================================== */
+.gallery-item img {
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: auto;
+}
