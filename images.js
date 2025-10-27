@@ -1,7 +1,7 @@
 const repoOwner = "0xnotkyo";
 const repoName = "walls";
 const branch = "main";
-const folders = ["images/mocha", "images/blue", "images/colourize"];
+const folders = ["images/mocha", "images/blue", "images/colourize", "images/misc", "images/landscape"];
 const imagesPerRow = 4;
 const rowsPerPage = 6;
 const imagesPerPage = imagesPerRow * rowsPerPage;
