@@ -27,8 +27,6 @@ The collection also includes a **web version** with a more visual and aesthethic
 
 🔗 https://0xnotkyo.github.io/walls/
 
-> 🧩 **Coming soon:** A **tag-based filtering system** will be added to allow users to explore wallpapers by categories such as *cyberpunk, minimalism, nature, anime*, and more — making browsing even more intuitive and enjoyable.
-
 ---
 
 ## 🖼️ Preview
