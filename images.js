@@ -129,32 +129,33 @@ async function loadGalleryPage(page = 1) {
     gallery.innerHTML = '';
 
     pageImages.forEach((image, index) => {
-        const div = document.createElement('div');
-        div.className = 'gallery-item loading';
+    const div = document.createElement('div');
+    div.className = 'gallery-item loading';
 
-        const img = new Image();
-        img.alt = `Wallpaper ${startIndex + index + 1}`;
-        img.loading = 'lazy';
-        img.onload = () => div.classList.remove('loading');
-        img.onerror = () => div.classList.remove('loading');
-        img.src = image.url;
+    const a = document.createElement('a');
+    a.href = image.url;
+    a.target = '_blank';
 
-        const a = document.createElement('a');
-        a.href = image.url;
-        a.target = '_blank';
-        a.appendChild(img);
+    const img = document.createElement('img');
+    img.alt = `Wallpaper ${startIndex + index + 1}`;
+    img.loading = 'lazy';
+    img.style.opacity = '0';
 
-        const info = document.createElement('div');
-        info.className = 'gallery-item-info';
-        info.innerHTML = `
-            <span class="gallery-item-title">Wallpaper ${startIndex + index + 1}</span>
-            <i class="fas fa-download download-icon"></i>
-        `;
+    img.onload = () => {
+        img.style.opacity = '1';
+        div.classList.remove('loading');
+    };
+    img.onerror = () => {
+        div.classList.remove('loading');
+    };
 
-        div.appendChild(a);
-        div.appendChild(info);
-        gallery.appendChild(div);
-    });
+    img.src = image.url;
+
+    a.appendChild(img);
+    div.appendChild(a);
+    div.appendChild(info);
+    gallery.appendChild(div);
+});
 
     createPagination(images.length, page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
