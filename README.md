@@ -31,7 +31,7 @@ The collection also includes a **web version** with a more visual and aesthethic
 
 ## 🖼️ Preview
 
-<img src="https://raw.githubusercontent.com/0xnotkyo/walls/main/assets/preview.png">
+<img src="https://raw.githubusercontent.com/0xnotkyo/walls/main/assets/web_preview.png">
 
 **Made with ♥ by [0xnotkyo](https://github.com/0xnotkyo)** 
 
