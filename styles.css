@@ -177,3 +177,35 @@ footer p {
   -ms-user-select: none;
   user-select: none;
 }
+
+/* ========================================
+   FILTROS POR CATEGORÍA
+   ======================================== */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 30px 0.5rem;
+}
+.filter-btn {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--accent-hover);
+    background: transparent;
+    color: var(--text);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    font-family: inherit;
+}
+.filter-btn:hover {
+    background: rgba(255, 26, 26, 0.15);
+    color: var(--text);
+}
+.filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: bold;
+}
