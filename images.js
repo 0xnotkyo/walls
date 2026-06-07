@@ -7,6 +7,7 @@ const rowsPerPage = 6;
 const imagesPerPage = imagesPerRow * rowsPerPage;
 
 let cachedImages = null;
+let activeFilter = "all";
 
 async function fetchImages() {
     if (cachedImages) return cachedImages;
@@ -19,13 +20,52 @@ async function fetchImages() {
         cachedImages = data.tree
             .filter(file => file.type === "blob" && folders.some(f => file.path.startsWith(f)))
             .sort((a, b) => a.path.localeCompare(b.path))
-            .map(file => `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${file.path}`);
+            .map(file => ({
+                url: `https://raw.githubusercontent.com/${repoOwner}/${repoName}/${branch}/${file.path}`,
+                folder: file.path.split("/")[1]
+            }));
 
         return cachedImages;
     } catch (error) {
         console.error("Error fetching images:", error);
         return [];
     }
+}
+
+function getFilteredImages(images) {
+    if (activeFilter === "all") return images;
+    return images.filter(img => img.folder === activeFilter);
+}
+
+function createFilters(images) {
+    const existing = document.querySelector('.filters');
+    if (existing) existing.remove();
+
+    const folderCounts = { all: images.length };
+    images.forEach(img => {
+        folderCounts[img.folder] = (folderCounts[img.folder] || 0) + 1;
+    });
+
+    const filters = document.createElement('div');
+    filters.className = 'filters';
+
+    const labels = { all: "All", mocha: "Mocha", blue: "Blue", colourize: "Colourize", misc: "Misc", landscape: "Landscape" };
+    const options = ["all", ...folders.map(f => f.split("/")[1])];
+
+    options.forEach(key => {
+        if (!folderCounts[key]) return;
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (key === activeFilter ? ' active' : '');
+        btn.textContent = `${labels[key] || key} (${folderCounts[key]})`;
+        btn.onclick = () => {
+            activeFilter = key;
+            loadGalleryPage(1);
+        };
+        filters.appendChild(btn);
+    });
+
+    const gallery = document.querySelector('.gallery');
+    gallery.parentNode.insertBefore(filters, gallery);
 }
 
 function createPagination(totalImages, currentPage) {
@@ -68,25 +108,28 @@ function createPagination(totalImages, currentPage) {
 
 async function loadGalleryPage(page = 1) {
     const gallery = document.querySelector('.gallery');
-    const images = await fetchImages();
+    const allImages = await fetchImages();
 
-    if (images.length === 0) {
+    if (allImages.length === 0) {
         gallery.innerHTML = "<p style='text-align:center;'>No se encontraron imágenes.</p>";
         return;
     }
 
+    createFilters(allImages);
+
+    const images = getFilteredImages(allImages);
     const startIndex = (page - 1) * imagesPerPage;
     const endIndex = Math.min(startIndex + imagesPerPage, images.length);
     const pageImages = images.slice(startIndex, endIndex);
 
     gallery.innerHTML = '';
 
-    pageImages.forEach((imageUrl, index) => {
+    pageImages.forEach((image, index) => {
         const div = document.createElement('div');
         div.className = 'gallery-item';
         div.innerHTML = `
-            <a href="${imageUrl}" target="_blank">
-                <img src="${imageUrl}" alt="Wallpaper ${startIndex + index + 1}" loading="lazy">
+            <a href="${image.url}" target="_blank">
+                <img src="${image.url}" alt="Wallpaper ${startIndex + index + 1}" loading="lazy">
                 <div class="gallery-item-info">
                     <span class="gallery-item-title">Wallpaper ${startIndex + index + 1}</span>
                     <i class="fas fa-download download-icon"></i>
@@ -97,6 +140,7 @@ async function loadGalleryPage(page = 1) {
     });
 
     createPagination(images.length, page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.addEventListener('DOMContentLoaded', () => loadGalleryPage(1));
