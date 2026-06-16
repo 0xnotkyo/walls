@@ -111,7 +111,7 @@ main { padding-top: 80px; }
 }
 .pagination a:hover,
 .pagination a.active {
-    background: linear-gradient(45deg, var(--accent-hover1), var(--accent1));
+    background: linear-gradient(45deg, var(--accent-hover), var(--accent));
     color: #e7e7ee; 
     font-weight: bold;
     animation: glow 3s infinite;
