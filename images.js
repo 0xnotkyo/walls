@@ -1,7 +1,7 @@
 const repoOwner = "0xnotkyo";
 const repoName = "walls";
 const branch = "main";
-const folders = ["images/mocha", "images/blue", "images/colourize", "images/misc", "images/landscape", "images/gruvbox"];
+const folders = ["images/mocha", "images/blue", "images/colourize", "images/misc", "images/landscape", "images/gruvbox", "images/monochrome"];
 const imagesPerRow = 4;
 const rowsPerPage = 6;
 const imagesPerPage = imagesPerRow * rowsPerPage;
@@ -53,7 +53,7 @@ function createFilters(images) {
     const filters = document.createElement('div');
     filters.className = 'filters';
 
-    const labels = { all: "All", mocha: "Mocha", blue: "Blue", colourize: "Colourize", misc: "Misc", landscape: "Landscape", gruvbox: "Gruvbox" };
+    const labels = { all: "All", mocha: "Mocha", blue: "Blue", colourize: "Colourize", misc: "Misc", landscape: "Landscape", gruvbox: "Gruvbox", monochrome: "MonoChrome" };
     const options = ["all", ...folders.map(f => f.split("/")[1])];
 
     options.forEach(key => {
